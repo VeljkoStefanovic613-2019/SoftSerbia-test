@@ -12,11 +12,13 @@ if (step2Data) {
 
 document.getElementById("form1").addEventListener("submit", function(e) {
   e.preventDefault();
-  const name = document.getElementById("name").value;
+  const name = document.getElementById("name").value.trim();
+
   if (!name) {
-    document.getElementById("error1").innerText = "Polje je obavezno!";
+    document.getElementById("error1").innerText = "Molimo unesite ime i prezime!";
     return;
   }
+
   document.getElementById("error1").innerText = "";
   localStorage.setItem("step1", JSON.stringify({ name }));
   goToStep(2);
@@ -24,7 +26,7 @@ document.getElementById("form1").addEventListener("submit", function(e) {
 
 document.getElementById("form2").addEventListener("submit", function(e) {
   e.preventDefault();
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("email").value.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   document.getElementById("emailFormatError").innerText = "";
@@ -38,6 +40,7 @@ document.getElementById("form2").addEventListener("submit", function(e) {
     document.getElementById("emailFormatError").innerText = "Email adresa nije u odgovarajucem formatu!";
     return;
   }
+
   localStorage.setItem("step2", JSON.stringify({ email }));
   goToStep(3);
 });
@@ -46,6 +49,7 @@ function goToStep(step) {
   const globalError = document.getElementById("globalError");
   globalError.innerText = "";
 
+  // Provera sekvencijalnog popunjavanja
   if (step === 2 && !localStorage.getItem("step1")) {
     globalError.innerText = "Morate prvo popuniti korak 1!";
     return;
@@ -55,9 +59,11 @@ function goToStep(step) {
     return;
   }
 
+  // Vizuelna promena koraka
   document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
   document.getElementById("step" + step).classList.add("active");
   document.getElementById("title").innerText = "Registracija - korak " + step;
+  
   currentStep = step;
 
   if (step === 2) {
@@ -81,6 +87,7 @@ function finish() {
     return;
   }
 
+  // Prikaz finalnog ekrana sa slike
   localStorage.clear();
   document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
   document.getElementById("successStep").classList.add("active");
