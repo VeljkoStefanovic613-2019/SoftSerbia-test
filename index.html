@@ -7,8 +7,10 @@
 </head>
 <body>
 
-<h2 id="title">Registracija - korak 1</h2>
-<p id="globalError" class="error"></p>
+<div id="header-area">
+  <h2 id="title">Registracija - korak 1</h2>
+  <p id="globalError" class="error"></p>
+</div>
 
 <div id="step1" class="step active">
   <form id="form1">
@@ -17,7 +19,6 @@
     <br><br>
     <button type="submit">submit</button>
   </form>
-  <p id="error1" class="error"></p>
 </div>
 
 <div id="step2" class="step">
@@ -28,17 +29,15 @@
     <br><br>
     <button type="submit">submit</button>
   </form>
-  <p id="error2" class="error"></p>
 </div>
 
 <div id="step3" class="step">
-  <p id="termsError" class="error"></p>
   <h3>Pregled:</h3>
   <p id="review"></p>
   <label>
     Prihvatam uslove registracije
     <input type="checkbox" id="terms">
-  </label>
+</label>
   <br><br>
   <button onclick="finish()">submit</button>
 </div>

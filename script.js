@@ -1,43 +1,46 @@
 let currentStep = 1;
+const errorDisplay = document.getElementById("globalError");
+
+function showError(message) {
+  errorDisplay.innerText = message;
+}
+
+function clearError() {
+  errorDisplay.innerText = "";
+}
 
 const step1Data = JSON.parse(localStorage.getItem("step1"));
 const step2Data = JSON.parse(localStorage.getItem("step2"));
 
-if (step1Data) {
-  document.getElementById("name").value = step1Data.name;
-}
-if (step2Data) {
-  document.getElementById("email").value = step2Data.email;
-}
+if (step1Data) document.getElementById("name").value = step1Data.name;
+if (step2Data) document.getElementById("email").value = step2Data.email;
 
 document.getElementById("form1").addEventListener("submit", function(e) {
   e.preventDefault();
+  clearError();
   const name = document.getElementById("name").value.trim();
 
   if (!name) {
-    document.getElementById("error1").innerText = "Molimo unesite ime i prezime!";
+    showError("Molimo unesite ime i prezime!");
     return;
   }
 
-  document.getElementById("error1").innerText = "";
   localStorage.setItem("step1", JSON.stringify({ name }));
   goToStep(2);
 });
 
 document.getElementById("form2").addEventListener("submit", function(e) {
   e.preventDefault();
+  clearError();
   const email = document.getElementById("email").value.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  document.getElementById("emailFormatError").innerText = "";
-  document.getElementById("error2").innerText = "";
-
   if (!email) {
-    document.getElementById("error2").innerText = "Polje je obavezno!";
+    showError("Polje je obavezno!");
     return;
   }
   if (!emailRegex.test(email)) {
-    document.getElementById("emailFormatError").innerText = "Email adresa nije u odgovarajucem formatu!";
+    showError("Email adresa nije u odgovarajucem formatu!");
     return;
   }
 
@@ -46,20 +49,17 @@ document.getElementById("form2").addEventListener("submit", function(e) {
 });
 
 function goToStep(step) {
-  const globalError = document.getElementById("globalError");
-  globalError.innerText = "";
+  clearError();
 
-  // Provera sekvencijalnog popunjavanja
   if (step === 2 && !localStorage.getItem("step1")) {
-    globalError.innerText = "Morate prvo popuniti korak 1!";
+    showError("Morate prvo popuniti korak 1!");
     return;
   }
   if (step === 3 && !localStorage.getItem("step2")) {
-    globalError.innerText = "Morate prvo popuniti korak 2!";
+    showError("Morate prvo popuniti korak 2!");
     return;
   }
 
-  // Vizuelna promena koraka
   document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
   document.getElementById("step" + step).classList.add("active");
   document.getElementById("title").innerText = "Registracija - korak " + step;
@@ -78,21 +78,18 @@ function goToStep(step) {
 }
 
 function finish() {
+  clearError();
   const terms = document.getElementById("terms").checked;
-  const termsError = document.getElementById("termsError");
-  termsError.innerText = "";
 
   if (!terms) {
-    termsError.innerText = "Molimo prihvatite uslove registracije!";
+    showError("Molimo prihvatite uslove registracije!");
     return;
   }
 
-  // Prikaz finalnog ekrana sa slike
   localStorage.clear();
   document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
   document.getElementById("successStep").classList.add("active");
   
-  document.getElementById("title").style.display = "none";
+  document.getElementById("header-area").style.display = "none";
   document.getElementById("mainNav").style.display = "none";
-  document.getElementById("globalError").style.display = "none";
 }
