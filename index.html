@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<title>Registracija</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2 id="title">Registracija - korak 1</h2>
+<p id="globalError" class="error"></p>
+
+<div id="step1" class="step active">
+  <form id="form1">
+    <label>Ime i prezime:</label>
+    <input type="text" id="name">
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+  <p id="error1" class="error"></p>
+</div>
+
+<div id="step2" class="step">
+  <form id="form2">
+    <label>Email:</label>
+    <input type="email" id="email">
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+  <p id="error2" class="error"></p>
+</div>
+
+<div id="step3" class="step">
+  <h3>Pregled:</h3>
+  <p id="review"></p>
+  <button onclick="finish()">Završi</button>
+</div>
+
+<br>
+
+<div class="nav">
+  <a onclick="goToStep(1)">Korak 1</a> |
+  <a onclick="goToStep(2)">Korak 2</a> |
+  <a onclick="goToStep(3)">Korak 3</a> |
+  <a onclick="goToStep(3)">Kraj</a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
