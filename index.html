@@ -15,30 +15,44 @@
     <label>Ime i prezime:</label>
     <input type="text" id="name">
     <br><br>
-    <button type="submit">Submit</button>
+    <button type="submit">submit</button>
   </form>
   <p id="error1" class="error"></p>
 </div>
 
 <div id="step2" class="step">
+  <p id="emailFormatError" class="error"></p>
+  <p><strong>Ime i prezime:</strong> <span id="displayName"></span></p>
   <form id="form2">
     <label>Email:</label>
-    <input type="email" id="email">
+    <input type="text" id="email">
     <br><br>
-    <button type="submit">Submit</button>
+    <button type="submit">submit</button>
   </form>
   <p id="error2" class="error"></p>
 </div>
 
 <div id="step3" class="step">
+  <p id="termsError" class="error"></p>
   <h3>Pregled:</h3>
   <p id="review"></p>
-  <button onclick="finish()">Završi</button>
+  <label>
+    Prihvatam uslove registracije
+    <input type="checkbox" id="terms">
+  </label>
+  <br><br>
+  <button onclick="finish()">submit</button>
+</div>
+
+<div id="successStep" class="step">
+  <h1>Registracija - uspešna</h1>
+  <p>Hvala!</p>
+  <br>
+  <a href="#" onclick="location.reload()" class="success-link">Nova registracija</a>
 </div>
 
 <br>
-
-<div class="nav">
+<div class="nav" id="mainNav">
   <a onclick="goToStep(1)">Korak 1</a> |
   <a onclick="goToStep(2)">Korak 2</a> |
   <a onclick="goToStep(3)">Korak 3</a> |

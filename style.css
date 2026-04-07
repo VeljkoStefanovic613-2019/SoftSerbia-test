@@ -1,5 +1,6 @@
 body {
   font-family: Arial, sans-serif;
+  padding: 20px;
 }
 
 .step {
@@ -13,7 +14,7 @@ body {
 .error {
   color: red;
   font-weight: bold;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .nav a {
@@ -21,4 +22,20 @@ body {
   cursor: pointer;
   color: blue;
   text-decoration: underline;
+}
+
+/* Stilovi za finalni ekran */
+#successStep h1 {
+  margin-top: 0;
+  font-size: 28px;
+}
+
+#successStep p {
+  font-size: 20px;
+}
+
+.success-link {
+  color: purple;
+  text-decoration: underline;
+  font-size: 18px;
 }
